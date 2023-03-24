@@ -1,0 +1,17 @@
+{
+  "name": "signal-cli",
+  "version": "0.11.7",
+  "description": "NPM version of signal-cli: an unofficial commandline and dbus interface for signalapp/libsignal-service-java",
+  "main": "index.js",
+  "bin": "./signal-cli-0.11.7/bin/signal-cli",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "signal",
+    "messenger",
+    "signal-cli"
+  ],
+  "author": "dsernst",
+  "license": "ISC"
+}
