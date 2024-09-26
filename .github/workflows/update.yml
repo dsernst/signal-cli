@@ -1,0 +1,94 @@
+name: Automatic updater for signal-cli
+
+on:
+    schedule:
+        - cron: '0 0 * * *'
+    push:
+        branches:
+            - master
+    workflow_dispatch:
+
+jobs:
+    check_update:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v2
+
+            - name: Setup Git
+              run: |
+                git --version
+                git config user.name "GitHub Actions Bot"
+                git config user.email "<>"
+                git status
+                git tag
+
+            - name: Get latest version from signal-cli
+              id: get_release
+              uses: joutvhu/get-release@v1.0.3
+              with:
+                owner: AsamK
+                repo: signal-cli
+                latest: true
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Read current version from package.json
+              id: read_version
+              run: |
+                echo "version=$(jq -r '.version' package.json)" >> $GITHUB_OUTPUT
+
+            - name: Update package.json and signal-cli
+              id: update_package
+              run: |
+                tmptag=${{ steps.get_release.outputs.name }} && export tagname=${tmptag/v/}
+                if [[ ${tagname} != "${{ steps.read_version.outputs.version }}" ]]; then
+                  echo "Versions do not match, updating"
+                  rm -rf signal-cli
+                  curl -L -o release.tar.gz "https://github.com/AsamK/signal-cli/releases/latest/download/signal-cli-${tagname}.tar.gz"
+                  tar -xzf release.tar.gz
+                  mv signal-cli-${tagname} signal-cli
+                  rm release.tar.gz
+                  echo ${tagname} | jq '.version = input' package.json > package.json
+                  echo "tagname=${tagname}" >> $GITHUB_OUTPUT
+                  echo "update=true" >> $GITHUB_OUTPUT
+                else
+                  echo "Versions match, no need to update"
+                  echo "update=false" >> $GITHUB_OUTPUT
+                fi
+
+            - name: Modify package.json
+              id: modify_package
+              if: steps.update_package.outputs.update == 'true'
+              run: |
+                echo '{
+                  "name": "signal-cli",
+                  "version": "${{ steps.update_package.outputs.tagname }}",
+                  "description": "NPM version of signal-cli: an unofficial commandline and dbus interface for signalapp/libsignal-service-java",
+                  "main": "index.js",
+                  "bin": "./signal-cli/bin/signal-cli",
+                  "scripts": {
+                  "test": "echo \"Error: no test specified\" && exit 1"
+                  },
+                  "repository": {
+                  "type": "git",
+                  "url": "https://github.com/dsernst/signal-cli.git"
+                  },
+                  "keywords": [
+                  "signal",
+                  "signal-cli",
+                  "messenger",
+                  "messages"
+                  ],
+                  "author": "dsernst",
+                  "license": "ISC"
+                }' > package.json
+
+            - name: Commit and push changes upstream
+              id: commit_push
+              if: steps.update_package.outputs.update == 'true'
+              run: |
+                git add package.json
+                git add signal-cli/*/*
+                git commit -m "Update upstream to ${{ steps.get_release.outputs.tag_name }}"
+                git push origin HEAD:main
