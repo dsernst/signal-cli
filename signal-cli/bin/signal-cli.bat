@@ -36,7 +36,7 @@ set APP_HOME=%DIRNAME%..
 for %%i in ("%APP_HOME%") do set APP_HOME=%%~fi
 
 @rem Add default JVM options here. You can also use JAVA_OPTS and SIGNAL_CLI_OPTS to pass JVM options to this script.
-set DEFAULT_JVM_OPTS=
+set DEFAULT_JVM_OPTS="--enable-native-access=ALL-UNNAMED"
 
 @rem Find java.exe
 if defined JAVA_HOME goto findJavaFromJavaHome
@@ -70,7 +70,7 @@ goto fail
 :execute
 @rem Setup the command line
 
-set CLASSPATH=%APP_HOME%\lib\signal-cli-0.13.14.jar;%APP_HOME%\lib\libsignal-cli-0.13.14.jar;%APP_HOME%\lib\bcprov-jdk18on-1.80.jar;%APP_HOME%\lib\signal-service-java-2.15.3_unofficial_121.jar;%APP_HOME%\lib\jackson-module-kotlin-2.18.3.jar;%APP_HOME%\lib\jackson-annotations-2.18.3.jar;%APP_HOME%\lib\jackson-core-2.18.3.jar;%APP_HOME%\lib\jackson-databind-2.18.3.jar;%APP_HOME%\lib\argparse4j-0.9.0.jar;%APP_HOME%\lib\dbus-java-transport-native-unixsocket-5.0.0.jar;%APP_HOME%\lib\jul-to-slf4j-2.0.17.jar;%APP_HOME%\lib\logback-classic-1.5.18.jar;%APP_HOME%\lib\dbus-java-core-5.0.0.jar;%APP_HOME%\lib\HikariCP-6.3.0.jar;%APP_HOME%\lib\slf4j-api-2.0.17.jar;%APP_HOME%\lib\logback-core-1.5.18.jar;%APP_HOME%\lib\sqlite-jdbc-3.49.1.0.jar;%APP_HOME%\lib\jsr305-3.0.2.jar;%APP_HOME%\lib\core-util-jvm-2.15.3_unofficial_121.jar;%APP_HOME%\lib\rxkotlin-3.0.1.jar;%APP_HOME%\lib\okhttp-4.12.0.jar;%APP_HOME%\lib\kotlinx-coroutines-core-jvm-1.9.0.jar;%APP_HOME%\lib\kotlin-stdlib-jdk7-2.1.0.jar;%APP_HOME%\lib\wire-runtime-jvm-4.4.3.jar;%APP_HOME%\lib\okio-jvm-3.10.2.jar;%APP_HOME%\lib\kotlin-reflect-2.1.0.jar;%APP_HOME%\lib\kotlin-stdlib-2.1.0.jar;%APP_HOME%\lib\kotlin-stdlib-jdk8-2.1.0.jar;%APP_HOME%\lib\libphonenumber-8.13.50.jar;%APP_HOME%\lib\libsignal-client-0.68.1.jar;%APP_HOME%\lib\rxjava-3.0.13.jar;%APP_HOME%\lib\annotations-23.0.0.jar;%APP_HOME%\lib\reactive-streams-1.0.3.jar
+set CLASSPATH=%APP_HOME%\lib\signal-cli-0.13.15.jar;%APP_HOME%\lib\libsignal-cli-0.13.15.jar;%APP_HOME%\lib\bcprov-jdk18on-1.80.jar;%APP_HOME%\lib\signal-service-java-2.15.3_unofficial_122.jar;%APP_HOME%\lib\jackson-module-kotlin-2.19.0.jar;%APP_HOME%\lib\jackson-annotations-2.19.0.jar;%APP_HOME%\lib\jackson-core-2.19.0.jar;%APP_HOME%\lib\jackson-databind-2.19.0.jar;%APP_HOME%\lib\argparse4j-0.9.0.jar;%APP_HOME%\lib\dbus-java-transport-native-unixsocket-5.0.0.jar;%APP_HOME%\lib\jul-to-slf4j-2.0.17.jar;%APP_HOME%\lib\logback-classic-1.5.18.jar;%APP_HOME%\lib\dbus-java-core-5.0.0.jar;%APP_HOME%\lib\HikariCP-6.3.0.jar;%APP_HOME%\lib\slf4j-api-2.0.17.jar;%APP_HOME%\lib\logback-core-1.5.18.jar;%APP_HOME%\lib\sqlite-jdbc-3.49.1.0.jar;%APP_HOME%\lib\jsr305-3.0.2.jar;%APP_HOME%\lib\core-util-jvm-2.15.3_unofficial_122.jar;%APP_HOME%\lib\rxkotlin-3.0.1.jar;%APP_HOME%\lib\okhttp-4.12.0.jar;%APP_HOME%\lib\kotlinx-coroutines-core-jvm-1.9.0.jar;%APP_HOME%\lib\kotlin-stdlib-jdk7-2.1.0.jar;%APP_HOME%\lib\wire-runtime-jvm-4.4.3.jar;%APP_HOME%\lib\okio-jvm-3.10.2.jar;%APP_HOME%\lib\kotlin-reflect-2.1.0.jar;%APP_HOME%\lib\kotlin-stdlib-2.1.0.jar;%APP_HOME%\lib\kotlin-stdlib-jdk8-2.1.0.jar;%APP_HOME%\lib\libphonenumber-8.13.50.jar;%APP_HOME%\lib\libsignal-client-0.70.0.jar;%APP_HOME%\lib\rxjava-3.0.13.jar;%APP_HOME%\lib\annotations-23.0.0.jar;%APP_HOME%\lib\reactive-streams-1.0.3.jar
 
 
 @rem Execute signal-cli
