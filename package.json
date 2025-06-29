@@ -1,6 +1,6 @@
 {
   "name": "signal-cli",
-  "version": "0.13.16",
+  "version": "0.13.17",
   "description": "NPM version of signal-cli: an unofficial commandline and dbus interface for signalapp/libsignal-service-java",
   "main": "index.js",
   "bin": "./signal-cli/bin/signal-cli",
