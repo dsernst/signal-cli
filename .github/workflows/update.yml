@@ -90,5 +90,5 @@ jobs:
         run: |
           git add package.json
           git add signal-cli/*/*
-          git commit -m "Update upstream to ${{ steps.get_release.outputs.tag_name }}"
+          git commit -m "Update to match upstream ${{ steps.get_release.outputs.tag_name }}"
           git push origin HEAD:main
