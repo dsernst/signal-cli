@@ -23,8 +23,8 @@
 @rem
 @rem ##########################################################################
 
-@rem Set local scope for the variables with windows NT shell
-if "%OS%"=="Windows_NT" setlocal
+@rem Set local scope for the variables, and ensure extensions are enabled
+setlocal EnableExtensions
 
 set DIRNAME=%~dp0
 if "%DIRNAME%"=="" set DIRNAME=.
@@ -51,7 +51,7 @@ echo. 1>&2
 echo Please set the JAVA_HOME variable in your environment to match the 1>&2
 echo location of your Java installation. 1>&2
 
-goto fail
+"%COMSPEC%" /c exit 1
 
 :findJavaFromJavaHome
 set JAVA_HOME=%JAVA_HOME:"=%
@@ -65,30 +65,19 @@ echo. 1>&2
 echo Please set the JAVA_HOME variable in your environment to match the 1>&2
 echo location of your Java installation. 1>&2
 
-goto fail
+"%COMSPEC%" /c exit 1
 
 :execute
 @rem Setup the command line
 
-set CLASSPATH=%APP_HOME%\lib\signal-cli-0.14.3.jar;%APP_HOME%\lib\libsignal-cli-0.14.3.jar;%APP_HOME%\lib\bcprov-jdk18on-1.84.jar;%APP_HOME%\lib\jackson-core-2.20.2.jar;%APP_HOME%\lib\signal-service-java-2.15.3_unofficial_144.jar;%APP_HOME%\lib\jackson-module-kotlin-2.20.2.jar;%APP_HOME%\lib\jackson-databind-2.20.2.jar;%APP_HOME%\lib\argparse4j-0.9.0.jar;%APP_HOME%\lib\dbus-java-transport-native-unixsocket-5.0.0.jar;%APP_HOME%\lib\jul-to-slf4j-2.0.17.jar;%APP_HOME%\lib\logback-classic-1.5.32.jar;%APP_HOME%\lib\dbus-java-core-5.0.0.jar;%APP_HOME%\lib\micronaut-json-schema-annotations-2.0.0-M8.jar;%APP_HOME%\lib\micronaut-inject-5.0.0-M17.jar;%APP_HOME%\lib\HikariCP-7.0.2.jar;%APP_HOME%\lib\micronaut-core-5.0.0-M17.jar;%APP_HOME%\lib\slf4j-api-2.0.17.jar;%APP_HOME%\lib\core-3.5.4.jar;%APP_HOME%\lib\jackson-annotations-2.21.jar;%APP_HOME%\lib\logback-core-1.5.32.jar;%APP_HOME%\lib\sqlite-jdbc-3.53.0.0.jar;%APP_HOME%\lib\jakarta.inject-api-2.0.1.jar;%APP_HOME%\lib\jakarta.annotation-api-2.1.1.jar;%APP_HOME%\lib\models-jvm-2.15.3_unofficial_144.jar;%APP_HOME%\lib\util-jvm-2.15.3_unofficial_144.jar;%APP_HOME%\lib\libsignal-client-0.92.1.jar;%APP_HOME%\lib\kotlinx-coroutines-core-jvm-1.10.2.jar;%APP_HOME%\lib\jspecify-1.0.0.jar;%APP_HOME%\lib\kotlin-reflect-2.3.10.jar;%APP_HOME%\lib\rxkotlin-3.0.1.jar;%APP_HOME%\lib\wire-runtime-jvm-4.9.11.jar;%APP_HOME%\lib\kotlin-stdlib-jdk8-2.3.10.jar;%APP_HOME%\lib\okhttp-jvm-5.3.2.jar;%APP_HOME%\lib\kotlin-stdlib-jdk7-2.3.10.jar;%APP_HOME%\lib\kotlinx-serialization-core-jvm-1.9.0.jar;%APP_HOME%\lib\kotlinx-serialization-json-jvm-1.9.0.jar;%APP_HOME%\lib\okio-jvm-3.16.4.jar;%APP_HOME%\lib\kotlin-stdlib-2.3.10.jar;%APP_HOME%\lib\rxjava-3.0.13.jar;%APP_HOME%\lib\reactive-streams-1.0.4.jar;%APP_HOME%\lib\jsr305-3.0.2.jar;%APP_HOME%\lib\libphonenumber-8.13.50.jar;%APP_HOME%\lib\annotations-23.0.0.jar
+set CLASSPATH=%APP_HOME%\lib\signal-cli-0.14.4.1.jar;%APP_HOME%\lib\libsignal-cli-0.14.4.1.jar;%APP_HOME%\lib\bcprov-jdk18on-1.84.jar;%APP_HOME%\lib\jackson-core-2.20.2.jar;%APP_HOME%\lib\signal-network-2.15.3_unofficial_147.jar;%APP_HOME%\lib\signal-service-java-2.15.3_unofficial_147.jar;%APP_HOME%\lib\core-network-2.15.3_unofficial_147.jar;%APP_HOME%\lib\jackson-module-kotlin-2.20.2.jar;%APP_HOME%\lib\jackson-databind-2.20.2.jar;%APP_HOME%\lib\argparse4j-0.9.0.jar;%APP_HOME%\lib\dbus-java-transport-native-unixsocket-5.0.0.jar;%APP_HOME%\lib\jul-to-slf4j-2.0.18.jar;%APP_HOME%\lib\logback-classic-1.5.32.jar;%APP_HOME%\lib\dbus-java-core-5.0.0.jar;%APP_HOME%\lib\micronaut-json-schema-annotations-2.0.1.jar;%APP_HOME%\lib\micronaut-inject-5.0.0.jar;%APP_HOME%\lib\HikariCP-7.0.2.jar;%APP_HOME%\lib\micronaut-core-5.0.0.jar;%APP_HOME%\lib\slf4j-api-2.0.18.jar;%APP_HOME%\lib\core-3.5.4.jar;%APP_HOME%\lib\jackson-annotations-2.21.jar;%APP_HOME%\lib\logback-core-1.5.32.jar;%APP_HOME%\lib\sqlite-jdbc-3.53.1.0.jar;%APP_HOME%\lib\jakarta.inject-api-2.0.1.jar;%APP_HOME%\lib\jakarta.annotation-api-2.1.1.jar;%APP_HOME%\lib\models-jvm-2.15.3_unofficial_147.jar;%APP_HOME%\lib\util-jvm-2.15.3_unofficial_147.jar;%APP_HOME%\lib\libsignal-client-0.94.1.jar;%APP_HOME%\lib\kotlinx-coroutines-core-jvm-1.10.2.jar;%APP_HOME%\lib\jspecify-1.0.0.jar;%APP_HOME%\lib\kotlin-reflect-2.3.21.jar;%APP_HOME%\lib\rxkotlin-3.0.1.jar;%APP_HOME%\lib\kotlin-stdlib-jdk8-2.3.21.jar;%APP_HOME%\lib\okhttp-jvm-5.3.2.jar;%APP_HOME%\lib\wire-runtime-jvm-6.0.0-alpha02.jar;%APP_HOME%\lib\okio-jvm-3.17.0.jar;%APP_HOME%\lib\kotlin-stdlib-jdk7-2.3.21.jar;%APP_HOME%\lib\kotlinx-serialization-core-jvm-1.9.0.jar;%APP_HOME%\lib\kotlinx-serialization-json-jvm-1.9.0.jar;%APP_HOME%\lib\kotlin-stdlib-2.3.21.jar;%APP_HOME%\lib\rxjava-3.1.12.jar;%APP_HOME%\lib\reactive-streams-1.0.4.jar;%APP_HOME%\lib\annotations-23.0.0.jar;%APP_HOME%\lib\libphonenumber-9.0.29.jar;%APP_HOME%\lib\jsr305-3.0.2.jar
 
 
 @rem Execute signal-cli
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %SIGNAL_CLI_OPTS%  -classpath "%CLASSPATH%" org.asamk.signal.Main %*
+@rem endlocal doesn't take effect until after the line is parsed and variables are expanded
+@rem which allows us to clear the local environment before executing the java command
+endlocal & "%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %SIGNAL_CLI_OPTS%  -classpath "%CLASSPATH%" org.asamk.signal.Main %* & call :exitWithErrorLevel
 
-:end
-@rem End local scope for the variables with windows NT shell
-if %ERRORLEVEL% equ 0 goto mainEnd
-
-:fail
-rem Set variable SIGNAL_CLI_EXIT_CONSOLE if you need the _script_ return code instead of
-rem the _cmd.exe /c_ return code!
-set EXIT_CODE=%ERRORLEVEL%
-if %EXIT_CODE% equ 0 set EXIT_CODE=1
-if not ""=="%SIGNAL_CLI_EXIT_CONSOLE%" exit %EXIT_CODE%
-exit /b %EXIT_CODE%
-
-:mainEnd
-if "%OS%"=="Windows_NT" endlocal
-
-:omega
+:exitWithErrorLevel
+@rem Use "%COMSPEC%" /c exit to allow operators to work properly in scripts
+"%COMSPEC%" /c exit %ERRORLEVEL%
